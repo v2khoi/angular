@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Hero } from './hero';
-import { HEROES } from './mock-heroes';
 import { Observable, of} from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -57,11 +56,11 @@ export class HeroService {
   }*/
 
   getHero(id: number): Observable<Hero> {
-    const url = this.heroesUrl + '/' + id;
-    console.log();
+    const url = `${this.heroesUrl}/${id}`;
+    console.log(url);
     return this.http.get<Hero>(url).pipe(
-      tap(_ => this.log('fetched hero id=${id}')),
-      catchError(this.handleError<Hero>('getHero id=${id}'))
+      tap(_ => this.log(`fetched hero id=${id}`)),
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
 
